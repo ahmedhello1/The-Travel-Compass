@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome To The Travel Compass - Contact us</title>
+<style>
+
+        body {
+
+            font-family: Arial, sans-serif;
+
+            text-align: center;
+
+            margin: 0;
+
+            padding: 50px;
+
+            background-color: #EFDFBB;
+
+        }
+ 
+        form {
+
+            display: inline-block;
+
+            text-align: left;
+
+            background-color: #722F37;
+
+            padding: 20px;
+
+            border-radius: 10px;
+
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+        }
+ 
+        input, button {
+
+            display: block;
+
+            width: calc(100% - 20px);
+
+            margin-bottom: 10px;
+
+            padding: 10px;
+
+            border: 1px solid #B6C3B2;
+
+            border-radius: 5px;
+
+            font-size: 16px;
+
+        }
+ 
+        button {
+
+            background-color: #5E6960;
+
+            color: white;
+
+            border: none;
+
+            border-radius: 5px;
+
+            cursor: pointer;
+
+        }
+ 
+        button:hover {
+
+            background-color: #3a3489;
+
+        }
+</style>
+ 
+    <!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-database.js"></script>
+<script>
+
+        // Firebase configuration
+
+        const firebaseConfig = {
+
+            apiKey: "AIzaSyAqIY6jGSpmQCgmx7IcivTXI-2uTBei5JI",
+
+            authDomain: "the-travel-compass-e5468.firebaseapp.com",
+
+            databaseURL: "https://the-travel-compass-e5468-default-rtdb.firebaseio.com",
+
+            projectId: "the-travel-compass-e5468",
+
+            storageBucket: "the-travel-compass-e5468.appspot.com",
+
+            messagingSenderId: "75926447073",
+
+            appId: "1:75926447073:web:c0eb336e9510e2da4368a0",
+
+            measurementId: "G-RMM2P1TF31"
+
+        };
+ 
+        // Initialize Firebase
+
+        firebase.initializeApp(firebaseConfig);
+ 
+        // Reference to the Realtime Database
+
+        const database = firebase.database();
+ 
+        // Submit Form Data to Firebase
+
+        function submitContactForm(event) {
+
+            event.preventDefault(); // Prevent page reload
+
+            const name = document.getElementById('name').value;
+
+            const email = document.getElementById('email').value;
+
+            const message = document.getElementById('message').value;
+ 
+            // Save data to Firebase
+
+            database.ref('contacts').push({
+
+                name: name,
+
+                email: email,
+
+                message: message
+
+            })
+
+            .then(() => {
+
+                alert('Thank you for your submission!');
+
+                document.getElementById('contactForm').reset(); // Reset the form
+
+            })
+
+            .catch((error) => {
+
+                alert('Error: ' + error.message);
+
+            });
+
+        }
+</script>
+</head>
+<body>
+<h1>Welcome To The Travel Compass - Contact us</h1>
+<form id="contactForm" onsubmit="submitContactForm(event)">
+<input type="text" id="name" name="name" placeholder="Enter your name" required>
+<input type="email" id="email" name="email" placeholder="Enter your email" required>
+<input type="text" id="message" name="message" placeholder="Enter your message" required>
+<button type="submit">Submit</button>
+</form>
+</body>
+</html>
+
+ 
